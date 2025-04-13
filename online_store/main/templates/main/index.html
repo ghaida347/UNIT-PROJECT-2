@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+{%block title%} Home page {%endblock%}
+{% block topic %} Home {%endblock%}
+{% block content %}
+
+
+<main>
+<h2>Home page</h2>
+
+<div class="row mt-5 row-cols-1 row-cols-md-3 g-4"> <h3>Best Seller</h3></div>
+<div class="row mt-5 row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+      <div class="col">
+          <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow">
+              <img src="{{product.product_image.url}}" alt="product image " style="width: 10rem;">
+              <a href="{% url 'product:detail_product_view' product.id %}"> <h3>{{product.title}}</h3> </a>
+              <h4>{{product.price}} SR </h4>
+              <!-- <p>{{product.content}}</p> -->
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</main>
+
+
+
+<!-- 
+<div class="mb-4 sm:mb-6 flex justify-between items-center">
+    <h1 class="font-bold text-xl rtl:pl-3 ltr:pr-3" id="page-main-title">Perfumes</h1>
+    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+        <a href="#filters-menu" class="filters-trigger bg-border-color text-primary lg:hidden mt-2">
+            <i class="sicon-filter text-gray-text text-2xl me-2.5"></i></a>
+            <div class="flex items-center">
+                <label class="hidden sm:block rtl:ml-3 ltr:mr-3 whitespace-nowrap" for="product-filter">Order</label>
+                <select id="product-filter" class="form-input pt-0 pb-1 rtl:md:pl-10 ltr:md:pr-10">
+                    <option value="ourSuggest">ourSuggest</option>
+                    <option value="bestSell">bestSell </option>
+                    <option value="topRated"> topRated </option>
+                    <option value="priceFromTopToLow">priceFromTopToLow</option>
+                    <option value="priceFromLowToTop">priceFromLowToTop</option>
+                </select>
+            </div>
+        </div>
+</div> -->
+
+
+
+{%endblock%}

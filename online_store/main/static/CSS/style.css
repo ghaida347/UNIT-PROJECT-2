@@ -1,0 +1,15 @@
+.bg-indigo  {
+    --bs-bg-opacity: 1;
+    background-color:#793dd9;
+}
+main{
+    flex: 1;
+    background-image: url('/image/logo.png');
+    background-size: cover;       
+    background-repeat: no-repeat;  
+    background-position: center; 
+    
+}
+html, body{
+    height: 100%;
+}

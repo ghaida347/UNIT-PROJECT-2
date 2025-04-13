@@ -1,0 +1,36 @@
+{% extends "accounts/basic.html" %}
+{%block title%} singup page {%endblock%}
+{%block butt%} <a class="btn btn-light " aria-current="page" href="/accounts/signin/">Sign In</a>{%endblock%}
+{%block h%} Welcome back!{%endblock%}
+
+{%block content%}
+<!-- <h1>  Welcome back! </h1> -->
+<div class="col-6"> 
+    <form class="d-flex flex-column gap-1" action="{%url 'accounts:signup_view'%}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        
+        <label for="username">username:</label>
+        <input type="text"  name="username" class="from-control" placeholder="username..." required><br><br>
+
+        <label for="email">email:</label>
+        <input type="email"  name="email" class="from-control" placeholder="name@gmail.com " required><br><br>        
+        
+        <label for="password">password:</label>
+        <input type="password" id="password" name="password" class="from-control" placeholder="password..." required><br><br>
+
+        <label for="first_name">first_name:</label>
+        <input type="first_name"  name="first_name" class="from-control" placeholder="first_name..." required><br><br>
+
+        <label for="last_name">last_name:</label>
+        <input type="last_name"  name="last_name" class="from-control" placeholder="last_name..." required><br><br>
+        
+    
+        <input type="submit" class="btn btn-dark" value="Submit">
+    </form>
+
+
+</div>
+
+{%endblock%}
+
+{%block h1%} signup {%endblock%}

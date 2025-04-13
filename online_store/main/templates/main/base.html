@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'CSS/style.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>{%block title%} {%endblock%}</title>
+</head>
+<body>
+  <div class="container-fluid sticky-top bg-indigo pt-4 pb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark top-nav" aria-label="Eighth navbar example">
+      <div class="container">
+        <a class="navbar-brand" href="/"><h2 class="top-logo">Online Store</h2></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExample07">
+          <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-4 align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/product/all/">All Product </a>
+            </li> -->
+            {% if request.user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'product:add_product_view' %}" > Add product</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="#" >About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Products
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{%url 'product:all_product_view' %}">All</a></li>
+                <!-- <li><a class="dropdown-item" href="/product/search/?search=&product_type=All">All</a></li> -->
+                <li><a class="dropdown-item" href="{%url 'product:Perfumes_product_view' %}">Perfumes</a></li>
+                <li><a class="dropdown-item" href="{%url 'product:Oud_product_view' %}">Oud</a></li>
+                <li><a class="dropdown-item" href="{%url 'product:Other_product_view' %}">Other </a></li>
+              </ul>
+            </li>
+
+            <div class="search">
+              <form role="search" method="GET" action="{%url 'product:search_product_view' %}">
+                  <input type="search" placeholder="Search..." class="search-input" name="search" aria-label="Search"  required minlength="3"> 
+                  <input type="hidden" name="product_type" value={%if 'product_type' in request.GET %}{{request.GET.product_type}}{%else%}'All'{%endif%}>
+                  <!-- value="{{request.GIT.search}}"___ to display the word of search-->
+                   
+              </form>
+            </div>
+
+            {% if request.user.is_authenticated %}
+            <div class="d-flex gap-1 align-items-center">
+            <h6 class="p-0 m-0 text-white">welcome {{ request.user.username }}, </h6>
+            <li class="nav-item">
+              <a class="btn btn-light " aria-current="page" href="{% url 'accounts:logout_view' %}?next={{request.path}}">Log out</a>
+            </li>
+
+          </div>
+          {% else %}
+            <li class="nav-item">
+              <a class="btn btn-light " aria-current="page" href="{% url 'accounts:signup_view' %}">signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-light " aria-current="page" href="{% url 'accounts:signin_view' %}?next={{request.path}}">signin</a>
+            </li>
+          {% endif %}
+
+
+            
+          </ul>
+
+        </div>
+        
+      </div>
+    </nav>
+  </div>
+
+
+ 
+  <main class="container  mt-4">
+    {% block content %}
+    {% endblock %}
+    </main>
+
+
+
+    <div class="container">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <div class="col mb-3">
+            <a class="navbar-brand" href="/"><h2 class="top-logo">Online Store</h2></a>
+          <p class="text-muted">© 2025</p>
+        </div>
+    
+        <div class="col mb-3">
+    
+        </div>
+    
+        <div class="col mb-3">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+    
+        <div class="col mb-3">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+    
+        <div class="col mb-3">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

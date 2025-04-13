@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{%block title%} All product {%endblock%}
+{% block topic %} Products {%endblock%}
+{% block content %}
+<h2>All product</h2>
+
+
+<div class="row mt-5 row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+      <div class="col">
+          <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 shadow">
+              <img src="{{product.product_image.url}}" alt="product image " style="width: 10rem;">
+              <a href="{% url 'product:detail_product_view' product.id %}"> <h3>{{product.title}}</h3> </a>
+              <h4>{{product.price}} SR </h4>
+              <!-- <p>{{product.content}}</p> -->
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+

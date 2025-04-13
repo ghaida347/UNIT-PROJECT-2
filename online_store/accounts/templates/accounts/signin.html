@@ -1,0 +1,27 @@
+{% extends "accounts/basic.html" %}
+{%block title%} singin page {%endblock%}
+{%block butt%} <a class="btn btn-light " aria-current="page" href="/accounts/signup/">Sign Up </a> {%endblock%}
+{%block h%} Welcome back!{%endblock%}
+
+{%block content%}
+<!-- <h1> Welcome back! </h1> -->
+<div class="col-6"> 
+    <form class="d-flex flex-column gap-1" action="{%url 'accounts:signin_view'%}{% if 'next' in request.GET %}?next={{request.GET.next}}{% endif %}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        
+        <label for="username">username:</label>
+        <input type="text"  name="username" class="from-control" placeholder="username..." required><br><br> 
+        
+        <label for="password">password:</label>
+        <input type="password" id="password" name="password" class="from-control" placeholder="password..." required><br><br>
+
+
+    
+        <input type="submit" class="btn btn-dark" value="Submit">
+    </form>
+
+</div>
+
+{%endblock%}
+
+{%block h1%} signin {%endblock%}

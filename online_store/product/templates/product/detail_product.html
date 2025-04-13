@@ -1,0 +1,62 @@
+{% extends "main/base.html" %}
+{%block title%} Add product page {%endblock%}
+{% block content %}
+ <h1>{{product.title}}</h1>
+
+
+ <div class="row">
+
+    <div class="col">
+        <div class="d-flex flex-column gap-2">
+            <div class="d-flex justify-content-between">
+            </div>
+            <div class="d-flex flex-row gap-2 align-items-center">
+                <img src="{{ product.product_image.url }}" style="width: 15rem;" /> 
+                <p >{{ product.content }}</p>
+                
+            </div>
+            <div class="d-flex flex-column justify-content-end">
+              <h2 class="pb-5">{{product.price}} SR </h2>
+              <p> The quantity is {{product.quantity}}</p>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+            
+              <a href="{%url 'product:cart_view' product.id%}" class="btn btn-primary">Cart</a> 
+            </div>
+
+
+            {% if request.user.is_staff %}
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{%url 'product:update_product_view' product.id %}" class="btn btn-primary">update</a>   
+                
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">delete</button> 
+
+            </div>
+            {% endif %}
+            
+        </div>
+    </div>
+
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete {{product.title}} ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="{%url 'product:delete_product_view' product.id %}" class="btn btn_danger">delete</a>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+{%endblock%} 
